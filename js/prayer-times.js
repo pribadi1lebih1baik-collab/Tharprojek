@@ -10,7 +10,6 @@ class PrayerTimesManager {
         this.currentPrayer = null;
         this.nextPrayer = null;
         this.cacheExpiry = 24 * 60 * 60 * 1000; // 24 hours
-        this.init();
     }
 
     /**
@@ -416,5 +415,4 @@ class PrayerTimesManager {
     }
 }
 
-// Create global instance
-window.prayerTimesManager = new PrayerTimesManager();
+// Global instance will be created in main.js

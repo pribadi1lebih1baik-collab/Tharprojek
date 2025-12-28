@@ -7,7 +7,6 @@ class GamificationManager {
     constructor() {
         this.userProfile = null;
         this.achievements = [];
-        this.init();
     }
 
     /**
@@ -432,8 +431,8 @@ class GamificationManager {
      */
     async checkFinanceAchievements() {
         try {
-            const transactions = await window.storageManager.getAllDB('financeDB', 'transactions');
-            const budgets = await window.storageManager.getAllDB('financeDB', 'budgets');
+            const transactions = await window.storageManager.getAllFromDB('financeDB', 'transactions');
+            const budgets = await window.storageManager.getAllFromDB('financeDB', 'budgets');
 
             // First income
             const hasIncome = transactions.some(t => t.type === 'income');
@@ -578,5 +577,4 @@ class GamificationManager {
     }
 }
 
-// Create global instance
-window.gamificationManager = new GamificationManager();
+// Global instance will be created in main.js

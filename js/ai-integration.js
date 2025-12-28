@@ -11,7 +11,6 @@ class AIIntegration {
         this.requestCount = 0;
         this.cache = new Map();
         this.cacheExpiry = 7 * 24 * 60 * 60 * 1000; // 7 days for most responses
-        this.init();
     }
 
     /**
@@ -477,5 +476,4 @@ class AIIntegration {
     }
 }
 
-// Create global instance
-window.aiIntegration = new AIIntegration();
+// Global instance will be created in main.js
