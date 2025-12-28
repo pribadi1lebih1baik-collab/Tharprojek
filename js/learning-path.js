@@ -12,73 +12,7 @@ class LearningPath {
         this.learningData = null;
         
         // Learning categories dengan skill trees
-        this.categories = {
-            'financial': {
-                name: 'Financial Literacy',
-                icon: '💰',
-                color: 'bg-green-500',
-                skills: [
-                    { id: 'budgeting', name: 'Budgeting', xp: 50, unlocked: true, completed: false },
-                    { id: 'emergency-fund', name: 'Emergency Fund', xp: 75, unlocked: true, completed: false },
-                    { id: 'investing-basics', name: 'Investing Basics', xp: 100, unlocked: false, completed: false },
-                    { id: 'stock-market', name: 'Stock Market', xp: 150, unlocked: false, completed: false },
-                    { id: 'crypto', name: 'Cryptocurrency', xp: 120, unlocked: false, completed: false },
-                    { id: 'retirement-planning', name: 'Retirement Planning', xp: 200, unlocked: false, completed: false }
-                ]
-            },
-            'fitness': {
-                name: 'Physical Health',
-                icon: '💪',
-                color: 'bg-red-500',
-                skills: [
-                    { id: 'workout-routine', name: 'Workout Routine', xp: 50, unlocked: true, completed: false },
-                    { id: 'nutrition-basics', name: 'Nutrition Basics', xp: 75, unlocked: true, completed: false },
-                    { id: 'calisthenics', name: 'Calisthenics', xp: 100, unlocked: false, completed: false },
-                    { id: 'weight-training', name: 'Weight Training', xp: 120, unlocked: false, completed: false },
-                    { id: 'cardiovascular', name: 'Cardiovascular Health', xp: 100, unlocked: false, completed: false },
-                    { id: 'meal-prep', name: 'Meal Preparation', xp: 80, unlocked: false, completed: false }
-                ]
-            },
-            'mental': {
-                name: 'Mental Strength',
-                icon: '🧠',
-                color: 'bg-purple-500',
-                skills: [
-                    { id: 'meditation', name: 'Daily Meditation', xp: 50, unlocked: true, completed: false },
-                    { id: 'journaling', name: 'Journaling', xp: 40, unlocked: true, completed: false },
-                    { id: 'emotional-control', name: 'Emotional Control', xp: 100, unlocked: false, completed: false },
-                    { id: 'stress-management', name: 'Stress Management', xp: 90, unlocked: false, completed: false },
-                    { id: 'mindfulness', name: 'Mindfulness', xp: 80, unlocked: false, completed: false },
-                    { id: 'discipline', name: 'Self Discipline', xp: 150, unlocked: false, completed: false }
-                ]
-            },
-            'social': {
-                name: 'Social Skills',
-                icon: '🤝',
-                color: 'bg-blue-500',
-                skills: [
-                    { id: 'communication', name: 'Communication', xp: 50, unlocked: true, completed: false },
-                    { id: 'active-listening', name: 'Active Listening', xp: 60, unlocked: true, completed: false },
-                    { id: 'public-speaking', name: 'Public Speaking', xp: 120, unlocked: false, completed: false },
-                    { id: 'networking', name: 'Networking', xp: 100, unlocked: false, completed: false },
-                    { id: 'leadership', name: 'Leadership', xp: 150, unlocked: false, completed: false },
-                    { id: 'conflict-resolution', name: 'Conflict Resolution', xp: 110, unlocked: false, completed: false }
-                ]
-            },
-            'career': {
-                name: 'Career Development',
-                icon: '🚀',
-                color: 'bg-indigo-500',
-                skills: [
-                    { id: 'time-management', name: 'Time Management', xp: 50, unlocked: true, completed: false },
-                    { id: 'goal-setting', name: 'Goal Setting', xp: 60, unlocked: true, completed: false },
-                    { id: 'productivity', name: 'Productivity', xp: 80, unlocked: false, completed: false },
-                    { id: 'digital-marketing', name: 'Digital Marketing', xp: 100, unlocked: false, completed: false },
-                    { id: 'coding-basics', name: 'Coding Basics', xp: 150, unlocked: false, completed: false },
-                    { id: 'entrepreneurship', name: 'Entrepreneurship', xp: 200, unlocked: false, completed: false }
-                ]
-            }
-        };
+        this.categories = {};
         
         this.init();
     }

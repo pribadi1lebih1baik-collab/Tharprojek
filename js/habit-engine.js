@@ -735,26 +735,7 @@ class HabitEngine {
         
         // Fallback if parsing fails
         if (habits.length === 0) {
-            habits.push(
-                {
-                    name: 'Olahraga 30 menit',
-                    description: 'Meningkatkan kesehatan fisik dan mental',
-                    roadmap: 'Mulai dengan 10 menit, tingkatkan perlahan',
-                    icon: '💪'
-                },
-                {
-                    name: 'Meditasi 10 menit',
-                    description: 'Meningkatkan fokus dan ketenangan',
-                    roadmap: 'Gunakan app guided meditation',
-                    icon: '🧘'
-                },
-                {
-                    name: 'Baca buku 20 menit',
-                    description: 'Meningkatkan pengetahuan',
-                    roadmap: 'Pilih topik yang diminati',
-                    icon: '📚'
-                }
-            );
+            return [];
         }
         
         return habits;
