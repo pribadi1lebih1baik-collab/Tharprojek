@@ -540,11 +540,6 @@ class StorageManager {
             // Clear localStorage too
             localStorage.clear();
             console.log('All databases and localStorage cleared');
-
-            // Re-initialize databases
-            await this.initIndexedDB();
-            console.log('All databases re-initialized');
-
         } catch (error) {
             console.error('Error resetting databases:', error);
             throw error;
