@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pria 1% Journey - Dashboard</title>
+    <meta name="description" content="Transformasi holistik menjadi pria terbaik versi Anda">
+    
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#1E40AF">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Pria 1%">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#1E40AF',
+                        accent: '#059669',
+                        warning: '#D97706',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-inter">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-primary flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+            <h2 class="text-white text-xl font-poppins font-semibold">Memuat Journey Anda...</h2>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-72 bg-primary transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-700">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">1%</span>
+                </div>
+                <div class="ml-3">
+                    <h1 class="text-white font-poppins font-bold text-lg">Pria 1%</h1>
+                    <p class="text-gray-400 text-xs">Journey to Excellence</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="index.html" class="nav-link active flex items-center px-4 py-3 text-white bg-secondary rounded-lg">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="habits.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        <span>Habit Tracker</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="finance.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                        <span>Keuangan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="learning.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <span>Pembelajaran</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mental.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span>Kesehatan Mental</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="progress.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>Progres</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- AI Quota Indicator -->
+        <div class="absolute bottom-4 left-4 right-4">
+            <div class="bg-gray-700 rounded-lg p-3">
+                <div class="flex items-center justify-between text-xs text-gray-300 mb-1">
+                    <span>AI Request Hari Ini</span>
+                    <span id="ai-quota-text">0/20</span>
+                </div>
+                <div class="w-full bg-gray-600 rounded-full h-2">
+                    <div id="ai-quota-bar" class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-72 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-30">
+            <div class="px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-poppins font-semibold text-gray-900" id="greeting-text">Selamat Pagi, Pejuang!</h2>
+                            <p class="text-sm text-gray-500" id="current-date">Senin, 1 Januari 2024</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Weather Widget -->
+                        <div id="weather-widget" class="hidden md:flex items-center space-x-2 bg-gray-50 rounded-lg px-3 py-2">
+                            <div id="weather-icon">☀️</div>
+                            <div>
+                                <div class="text-sm font-medium text-gray-900" id="weather-temp">25°C</div>
+                                <div class="text-xs text-gray-500" id="weather-city">Jakarta</div>
+                            </div>
+                        </div>
+                        <!-- Settings -->
+                        <a href="settings.html" class="p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="p-4 sm:px-6 lg:px-8 py-8">
+            <!-- Level & XP Section -->
+            <div class="bg-gradient-to-r from-secondary to-blue-700 rounded-2xl p-6 mb-8 text-white">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-2xl font-poppins font-bold" id="user-level">Level 1</h3>
+                        <p class="text-blue-100" id="user-title">Pemula</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold" id="user-xp">0</div>
+                        <div class="text-blue-100 text-sm">XP</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="flex justify-between text-sm mb-1">
+                        <span>Progress ke Level 2</span>
+                        <span id="xp-progress-text">0/100</span>
+                    </div>
+                    <div class="w-full bg-blue-900 bg-opacity-50 rounded-full h-3">
+                        <div id="xp-progress-bar" class="bg-white bg-opacity-90 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prayer Times Widget -->
+            <div id="prayer-widget" class="bg-white rounded-2xl shadow-sm p-6 mb-8 hidden">
+                <h3 class="text-lg font-poppins font-semibold text-gray-900 mb-4">Jadwal Shalat</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div class="prayer-time text-center p-3 bg-gray-50 rounded-lg" data-prayer="subuh">
+                        <div class="text-xs text-gray-500 mb-1">Subuh</div>
+                        <div class="font-semibold text-gray-900" id="subuh-time">--:--</div>
+                    </div>
+                    <div class="prayer-time text-center p-3 bg-gray-50 rounded-lg" data-prayer="dzuhur">
+                        <div class="text-xs text-gray-500 mb-1">Dzuhur</div>
+                        <div class="font-semibold text-gray-900" id="dzuhur-time">--:--</div>
+                    </div>
+                    <div class="prayer-time text-center p-3 bg-gray-50 rounded-lg" data-prayer="ashar">
+                        <div class="text-xs text-gray-500 mb-1">Ashar</div>
+                        <div class="font-semibold text-gray-900" id="ashar-time">--:--</div>
+                    </div>
+                    <div class="prayer-time text-center p-3 bg-gray-50 rounded-lg" data-prayer="maghrib">
+                        <div class="text-xs text-gray-500 mb-1">Maghrib</div>
+                        <div class="font-semibold text-gray-900" id="maghrib-time">--:--</div>
+                    </div>
+                    <div class="prayer-time text-center p-3 bg-gray-50 rounded-lg" data-prayer="isya">
+                        <div class="text-xs text-gray-500 mb-1">Isya</div>
+                        <div class="font-semibold text-gray-900" id="isya-time">--:--</div>
+                    </div>
+                    <div class="prayer-time text-center p-3 bg-accent bg-opacity-10 rounded-lg">
+                        <div class="text-xs text-accent mb-1">Berikutnya</div>
+                        <div class="font-semibold text-accent" id="next-prayer">--:--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-emerald-100 rounded-lg">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Habits Hari Ini</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="habits-today">0/0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Streak Terbaik</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="best-streak">0 hari</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-amber-100 rounded-lg">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Keuangan</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="finance-health">--</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-lg">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Kesehatan Mental</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="mental-health">--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Habits -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-poppins font-semibold text-gray-900">Habits Hari Ini</h3>
+                    <a href="habits.html" class="text-sm text-secondary hover:text-blue-700 font-medium">Lihat Semua</a>
+                </div>
+                <div id="today-habits" class="space-y-3">
+                    <!-- Habits will be loaded here -->
+                    <div class="text-center py-8 text-gray-500">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <p>Belum ada habits ditambahkan</p>
+                        <a href="habits.html" class="text-secondary text-sm mt-2 inline-block">Tambah Habit Pertama</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Chart -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h3 class="text-lg font-poppins font-semibold text-gray-900 mb-6">Progres XP 7 Hari Terakhir</h3>
+                <div class="h-64">
+                    <canvas id="progress-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div id="panic-button" class="fixed bottom-6 right-6 z-40 hidden">
+        <button class="bg-red-500 hover:bg-red-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110" title="Butuh Bantuan?">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Panic Modal -->
+    <div id="panic-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-poppins font-semibold text-gray-900 mb-2">Anda dalam kondisi darurat?</h3>
+                <p class="text-gray-500">Pilih bantuan yang Anda butuhkan saat ini</p>
+            </div>
+            <div class="space-y-3">
+                <button id="report-trigger" class="w-full p-4 bg-amber-50 hover:bg-amber-100 rounded-lg text-left transition-colors">
+                    <div class="font-medium text-amber-900">Laporkan Trigger</div>
+                    <div class="text-sm text-amber-700">Saya sedang menghadapi godaan atau trigger negatif</div>
+                </button>
+                <button id="get-motivation" class="w-full p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-left transition-colors">
+                    <div class="font-medium text-emerald-900">Minta Motivasi</div>
+                    <div class="text-sm text-emerald-700">Saya butuh dorongan untuk tetap semangat</div>
+                </button>
+                <button id="redirect-positive" class="w-full p-4 bg-blue-50 hover:bg-blue-100 rounded-lg text-left transition-colors">
+                    <div class="font-medium text-blue-900">Redirect ke Halaman Positif</div>
+                    <div class="text-sm text-blue-700">Bawa saya ke konten yang menginspirasi</div>
+                </button>
+            </div>
+            <button id="close-panic-modal" class="w-full mt-4 p-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-gray-700 transition-colors">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage-manager.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/prayer-times.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

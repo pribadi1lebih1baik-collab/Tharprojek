@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mulai Journey - Pria 1%</title>
+    <meta name="description" content="Mulai perjalanan transformasi Anda">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#1E40AF',
+                        accent: '#059669',
+                        warning: '#D97706',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-primary via-gray-900 to-primary min-h-screen font-inter">
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-500" style="width: 16.67%"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-2xl">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-3xl">1%</span>
+                </div>
+                <h1 class="text-3xl font-poppins font-bold text-white mb-2">Pria 1% Journey</h1>
+                <p class="text-gray-400">Transformasi holistik menjadi versi terbaik Anda</p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <!-- Step 1: Welcome -->
+                <div id="step-1" class="step-content p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Selamat Datang di Journey Anda</h2>
+                        <p class="text-gray-500">Aplikasi ini akan membantu Anda menjadi pria terbaik versi diri sendiri melalui pendekatan gamifikasi dan self-improvement.</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-medium text-blue-900 mb-1">Privasi Anda Terjaga</h3>
+                                <p class="text-sm text-blue-700">Semua data disimpan di device Anda sendiri. Kami tidak memiliki server atau mengirim data pribadi Anda kemana-mana.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="nextStep()" class="w-full bg-secondary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                        Mulai Journey
+                    </button>
+                </div>
+
+                <!-- Step 2: Basic Info -->
+                <div id="step-2" class="step-content p-8 hidden">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Informasi Dasar</h2>
+                        <p class="text-gray-500">Kami perlu tahu sedikit tentang Anda untuk personalisasi konten.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                            <input type="text" id="full-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan nama lengkap Anda" minlength="3">
+                            <div id="name-error" class="text-red-500 text-sm mt-1 hidden">Nama minimal 3 karakter</div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
+                                <input type="text" id="birth-place" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Kota kelahiran">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
+                                <input type="date" id="birth-date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" max="">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Agama (Opsional)</label>
+                            <select id="religion" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Pilih agama (boleh dikosongi)</option>
+                                <option value="islam">Islam</option>
+                                <option value="kristen">Kristen</option>
+                                <option value="katolik">Katolik</option>
+                                <option value="hindu">Hindu</option>
+                                <option value="buddha">Buddha</option>
+                                <option value="konghucu">Konghucu</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 mt-8">
+                        <button onclick="prevStep()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                            Kembali
+                        </button>
+                        <button onclick="nextStep()" class="flex-1 bg-secondary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            Lanjut
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Location -->
+                <div id="step-3" class="step-content p-8 hidden">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Lokasi Anda</h2>
+                        <p class="text-gray-500">Kami butuh lokasi untuk jadwal shalat (jika Muslim) dan informasi cuaca.</p>
+                    </div>
+
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-medium text-blue-900 mb-1">Privasi Terjaga</h3>
+                                <p class="text-sm text-blue-700">Lokasi Anda hanya digunakan untuk fitur lokal dan tidak dikirim ke server kami.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="location-status" class="mb-4">
+                        <button id="get-location-btn" class="w-full bg-accent hover:bg-emerald-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Dapatkan Lokasi Otomatis
+                        </button>
+                        <div id="location-loading" class="hidden text-center py-4">
+                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
+                            <p class="text-gray-600">Mendapatkan lokasi...</p>
+                        </div>
+                    </div>
+
+                    <div id="manual-location" class="hidden">
+                        <div class="text-center py-4">
+                            <p class="text-gray-600 mb-4">Atau masukkan lokasi manual:</p>
+                            <input type="text" id="city-input" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3" placeholder="Masukkan nama kota">
+                            <button onclick="searchCity()" class="bg-secondary hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
+                                Cari
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="location-result" class="hidden bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-green-900">Lokasi berhasil didapatkan</p>
+                                <p class="text-sm text-green-700" id="location-name"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 mt-8">
+                        <button onclick="prevStep()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                            Kembali
+                        </button>
+                        <button onclick="nextStep()" id="location-next-btn" class="flex-1 bg-gray-300 text-gray-500 font-medium py-3 px-6 rounded-lg cursor-not-allowed" disabled>
+                            Lanjut
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Interests -->
+                <div id="step-4" class="step-content p-8 hidden">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Minat & Tujuan</h2>
+                        <p class="text-gray-500">Pilih area yang ingin Anda tingkatkan. Pilih semua yang sesuai.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="finance" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Keuangan</div>
+                                <div class="text-sm text-gray-500">Mengelola uang, investasi, financial freedom</div>
+                            </div>
+                        </label>
+
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="fitness" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Fitness</div>
+                                <div class="text-sm text-gray-500">Olahraga, kesehatan fisik, body transformation</div>
+                            </div>
+                        </label>
+
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="mental" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Kesehatan Mental</div>
+                                <div class="text-sm text-gray-500">Mindfulness, stress management, wellbeing</div>
+                            </div>
+                        </label>
+
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="skills" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Skill Development</div>
+                                <div class="text-sm text-gray-500">Programming, public speaking, leadership</div>
+                            </div>
+                        </label>
+
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="relationships" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Hubungan</div>
+                                <div class="text-sm text-gray-500">Dating, networking, social skills</div>
+                            </div>
+                        </label>
+
+                        <label class="interest-option flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                            <input type="checkbox" name="interests" value="spiritual" class="sr-only">
+                            <div class="w-6 h-6 border-2 border-gray-300 rounded mr-3 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900">Spiritual</div>
+                                <div class="text-sm text-gray-500">Ibadah, meditation, inner peace</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="flex space-x-3 mt-8">
+                        <button onclick="prevStep()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                            Kembali
+                        </button>
+                        <button onclick="nextStep()" class="flex-1 bg-secondary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            Lanjut
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Current Condition -->
+                <div id="step-5" class="step-content p-8 hidden">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Kondisi Saat Ini</h2>
+                        <p class="text-gray-500">Bantu kami memahami kondisi Anda saat ini untuk rekomendasi yang lebih tepat.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Apakah Anda sudah memiliki rutinitas harian?</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="routine" value="yes" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Sudah ada</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="routine" value="sometimes" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Kadang-kadang</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="routine" value="no" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Belum ada</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Bagaimana kondisi keuangan Anda?</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="finance" value="good" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Stabil</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="finance" value="manageable" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Cukup</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="finance" value="struggling" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Perlu bantuan</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Bagaimana kesehatan mental Anda akhir-akhir ini?</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="mental" value="good" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Baik</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="mental" value="neutral" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Biasa saja</span>
+                                </label>
+                                <label class="condition-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors">
+                                    <input type="radio" name="mental" value="need-support" class="sr-only">
+                                    <div class="w-4 h-4 border-2 border-gray-300 rounded-full mr-3"></div>
+                                    <span class="text-gray-900">Butuh dukungan</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 mt-8">
+                        <button onclick="prevStep()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                            Kembali
+                        </button>
+                        <button onclick="nextStep()" class="flex-1 bg-secondary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            Lanjut
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Special Concerns -->
+                <div id="step-6" class="step-content p-8 hidden">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-poppins font-bold text-gray-900 mb-2">Kebutuhan Khusus</h2>
+                        <p class="text-gray-500">Informasi ini membantu kami memberikan dukungan yang lebih tepat.</p>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-amber-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-medium text-amber-900 mb-1">Area Sensitif</h3>
+                                <p class="text-sm text-amber-700">Jika Anda menghadapi kecanduan (termasuk pornografi), kami memiliki fitur khusus untuk membantu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="flex items-start">
+                            <input type="checkbox" id="addiction-support" class="mt-1 mr-3 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <div>
+                                <div class="font-medium text-gray-900">Saya ingin dukungan untuk mengatasi kecanduan</div>
+                                <div class="text-sm text-gray-500">(Termasuk pornografi, gaming, atau kecanduan lainnya)</div>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start">
+                            <input type="checkbox" id="mental-health-support" class="mt-1 mr-3 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <div>
+                                <div class="font-medium text-gray-900">Saya memiliki kondisi kesehatan mental yang perlu diperhatikan</div>
+                                <div class="text-sm text-gray-500">(Depresi, anxiety, atau kondisi lainnya)</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="flex space-x-3 mt-8">
+                        <button onclick="prevStep()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                            Kembali
+                        </button>
+                        <button onclick="completeOnboarding()" class="flex-1 bg-gradient-to-r from-accent to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            Mulai Journey Saya
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="flex justify-center mt-6 space-x-2">
+                <div class="step-indicator active"></div>
+                <div class="step-indicator"></div>
+                <div class="step-indicator"></div>
+                <div class="step-indicator"></div>
+                <div class="step-indicator"></div>
+                <div class="step-indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage-manager.js"></script>
+    <script src="js/onboarding.js"></script>
+</body>
+</html>

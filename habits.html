@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker - Pria 1%</title>
+    <meta name="description" content="Lacak dan kembangkan habits positif Anda">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#1E40AF',
+                        accent: '#059669',
+                        warning: '#D97706',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-inter">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-primary flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+            <h2 class="text-white text-xl font-poppins font-semibold">Memuat habits...</h2>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-72 bg-primary transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-700">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">1%</span>
+                </div>
+                <div class="ml-3">
+                    <h1 class="text-white font-poppins font-bold text-lg">Pria 1%</h1>
+                    <p class="text-gray-400 text-xs">Journey to Excellence</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="index.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="habits.html" class="nav-link active flex items-center px-4 py-3 text-white bg-secondary rounded-lg">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        <span>Habit Tracker</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="finance.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                        <span>Keuangan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="learning.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <span>Pembelajaran</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mental.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span>Kesehatan Mental</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="progress.html" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>Progres</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- AI Quota Indicator -->
+        <div class="absolute bottom-4 left-4 right-4">
+            <div class="bg-gray-700 rounded-lg p-3">
+                <div class="flex items-center justify-between text-xs text-gray-300 mb-1">
+                    <span>AI Request Hari Ini</span>
+                    <span id="ai-quota-text">0/20</span>
+                </div>
+                <div class="w-full bg-gray-600 rounded-full h-2">
+                    <div id="ai-quota-bar" class="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-72 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-30">
+            <div class="px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        <div>
+                            <h2 class="text-xl font-poppins font-semibold text-gray-900">Habit Tracker</h2>
+                            <p class="text-sm text-gray-500">Kembangkan habits positif secara konsisten</p>
+                        </div>
+                    </div>
+                    <button id="add-habit-btn" class="bg-secondary hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Tambah Habit
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="p-4 sm:px-6 lg:px-8 py-8">
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Total Habits</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="total-habits">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-emerald-100 rounded-lg">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Streak Terbaik</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="best-streak">0 hari</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-amber-100 rounded-lg">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Hari Ini</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="today-progress">0/0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-lg">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Completion Rate</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="completion-rate">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-poppins font-semibold text-gray-900">Kalender Progres</h3>
+                    <div class="flex items-center space-x-2">
+                        <button id="prev-month" class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <span id="current-month" class="text-sm font-medium text-gray-900 min-w-[120px] text-center"></span>
+                        <button id="next-month" class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="habit-calendar" class="grid grid-cols-7 gap-1">
+                    <!-- Calendar will be rendered here -->
+                </div>
+                <div class="flex items-center justify-center mt-4 space-x-4 text-xs">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></div>
+                        <span class="text-gray-600">Selesai</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-amber-500 rounded-full mr-2"></div>
+                        <span class="text-gray-600">Sebagian</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-gray-300 rounded-full mr-2"></div>
+                        <span class="text-gray-600">Belum</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habits List -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-poppins font-semibold text-gray-900">Habits Saya</h3>
+                    <div class="flex items-center space-x-2">
+                        <select id="filter-category" class="text-sm border border-gray-300 rounded-lg px-3 py-1">
+                            <option value="">Semua Kategori</option>
+                            <option value="physical">Fisik</option>
+                            <option value="mental">Mental</option>
+                            <option value="financial">Finansial</option>
+                            <option value="social">Sosial</option>
+                            <option value="spiritual">Spiritual</option>
+                        </select>
+                        <select id="filter-difficulty" class="text-sm border border-gray-300 rounded-lg px-3 py-1">
+                            <option value="">Semua Level</option>
+                            <option value="easy">Mudah</option>
+                            <option value="medium">Sedang</option>
+                            <option value="hard">Sulit</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="habits-list" class="space-y-4">
+                    <!-- Habits will be loaded here -->
+                    <div class="text-center py-12 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <p class="text-lg mb-2">Belum ada habits ditambahkan</p>
+                        <p class="text-sm mb-4">Mulai journey Anda dengan menambahkan habit pertama</p>
+                        <button onclick="document.getElementById('add-habit-btn').click()" class="bg-secondary hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            Tambah Habit Pertama
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Habit Modal -->
+    <div id="add-habit-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-poppins font-semibold text-gray-900">Tambah Habit Baru</h3>
+                <button id="close-add-modal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="add-habit-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Habit</label>
+                    <input type="text" id="habit-name" class="form-input" placeholder="Contoh: Olahraga 30 menit" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+                    <textarea id="habit-description" class="form-input resize-none" rows="3" placeholder="Deskripsi singkat tentang habit ini"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
+                        <select id="habit-category" class="form-input" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="physical">💪 Fisik</option>
+                            <option value="mental">🧠 Mental</option>
+                            <option value="financial">💰 Finansial</option>
+                            <option value="social">👥 Sosial</option>
+                            <option value="spiritual">🕌 Spiritual</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tingkat Kesulitan</label>
+                        <select id="habit-difficulty" class="form-input" required>
+                            <option value="">Pilih Level</option>
+                            <option value="easy">🟢 Mudah (10 XP)</option>
+                            <option value="medium">🟡 Sedang (25 XP)</option>
+                            <option value="hard">🔴 Sulit (50 XP)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Target Waktu</label>
+                    <input type="time" id="habit-time" class="form-input">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Icon</label>
+                    <div class="grid grid-cols-6 gap-2">
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="💪">💪</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🏃">🏃</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="📚">📚</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🧘">🧘</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="💰">💰</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🎯">🎯</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🎨">🎨</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🎵">🎵</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🌱">🌱</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🔥">🔥</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="⭐">⭐</button>
+                        <button type="button" class="icon-option p-3 text-2xl border-2 border-gray-200 rounded-lg hover:border-blue-300" data-icon="🚀">🚀</button>
+                    </div>
+                    <input type="hidden" id="habit-icon" value="💪" required>
+                </div>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" id="cancel-add" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit" class="flex-1 bg-secondary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                        Simpan Habit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Recommendation Modal -->
+    <div id="ai-recommendation-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-poppins font-semibold text-gray-900">Rekomendasi Habit AI</h3>
+                <button id="close-ai-modal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="ai-recommendations" class="space-y-4 max-h-96 overflow-y-auto">
+                <!-- AI recommendations will be loaded here -->
+            </div>
+            <div class="flex space-x-3 mt-6">
+                <button id="refresh-ai-recommendations" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors">
+                    Refresh
+                </button>
+                <button id="use-ai-recommendation" class="flex-1 bg-accent hover:bg-emerald-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                    Gunakan Rekomendasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage-manager.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/habit-engine.js"></script>
+</body>
+</html>
