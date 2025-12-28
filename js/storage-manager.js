@@ -28,7 +28,7 @@ class StorageManager {
             if (isFirstTime) {
                 // Clear all existing data
                 await this.resetAllDatabases();
-                this.setToLocalStorage('firstTimeSetup', false);
+                this.saveToLocalStorage('firstTimeSetup', false);
                 console.log('First time setup - all databases cleared');
             }
             
@@ -560,7 +560,6 @@ class StorageManager {
             };
         });
     }
-}
 
     /**
      * Clear all data (for reset)
@@ -587,5 +586,4 @@ class StorageManager {
     }
 }
 
-// Create global instance
-window.storageManager = new StorageManager();
+// Global instance will be created in main.js

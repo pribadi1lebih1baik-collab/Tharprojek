@@ -7,7 +7,6 @@ class MainApp {
     constructor() {
         this.userProfile = null;
         this.isLoading = true;
-        this.init();
     }
 
     /**
@@ -15,11 +14,6 @@ class MainApp {
      */
     async init() {
         try {
-            // Wait for DOM to be fully loaded
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => this.init());
-                return;
-            }
 
             // Check if user has completed onboarding
             if (!this.checkOnboardingStatus()) {
@@ -869,4 +863,32 @@ class MainApp {
         errorModal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
         errorModal.innerHTML = `
             <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center">
-                <div class="w-16 h-16 bg-red-100 rounded-full flex items-cen
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-poppins font-semibold text-gray-900 mb-2">Terjadi Kesalahan</h3>
+                <p class="text-gray-600 mb-6">${message}</p>
+                <button onclick="window.location.reload()" class="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                    Muat Ulang Halaman
+                </button>
+            </div>
+        `;
+    }
+}
+
+// === Main App Initialization ===
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Storage Manager first
+    window.storageManager = new StorageManager();
+
+    // 2. Initialize other managers
+    window.gamificationManager = new GamificationManager();
+    window.prayerTimesManager = new PrayerTimesManager();
+    window.weatherManager = new WeatherManager();
+    window.aiIntegration = new AIIntegration();
+    window.notificationManager = new NotificationManager();
+
+    // 3. Initialize Main App
+    window.mainApp = new MainApp();
+    window.mainApp.init();
+});

@@ -8,7 +8,6 @@ class WeatherManager {
         this.userProfile = null;
         this.weatherData = null;
         this.cacheExpiry = 60 * 60 * 1000; // 1 hour
-        this.init();
     }
 
     /**
@@ -421,5 +420,4 @@ class WeatherManager {
     }
 }
 
-// Create global instance
-window.weatherManager = new WeatherManager();
+// Global instance will be created in main.js

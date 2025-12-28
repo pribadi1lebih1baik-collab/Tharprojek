@@ -7,7 +7,6 @@ class NotificationManager {
     constructor() {
         this.permission = 'default';
         this.scheduledNotifications = [];
-        this.init();
     }
 
     /**
@@ -503,5 +502,4 @@ class NotificationManager {
     }
 }
 
-// Create global instance
-window.notificationManager = new NotificationManager();
+// Global instance will be created in main.js
