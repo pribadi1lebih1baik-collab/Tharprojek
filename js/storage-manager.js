@@ -560,7 +560,6 @@ class StorageManager {
             };
         });
     }
-}
 
     /**
      * Clear all data (for reset)
@@ -585,6 +584,8 @@ class StorageManager {
             throw error;
         }
     }
+}
+
 }
 
 // Create global instance
