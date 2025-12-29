@@ -22,16 +22,6 @@ class StorageManager {
      */
     async initIndexedDB() {
         try {
-            // Check if this is first time setup
-            const isFirstTime = this.getFromLocalStorage('firstTimeSetup') !== false;
-            
-            if (isFirstTime) {
-                // Clear all existing data
-                await this.resetAllDatabases();
-                this.setToLocalStorage('firstTimeSetup', false);
-                console.log('First time setup - all databases cleared');
-            }
-            
             const promises = Object.entries(this.databases).map(([key, name]) => {
                 return this.initDB(name);
             });
@@ -561,31 +551,3 @@ class StorageManager {
         });
     }
 }
-
-    /**
-     * Clear all data (for reset)
-     */
-    async clearAllData() {
-        try {
-            // Clear localStorage
-            localStorage.clear();
-
-            // Clear IndexedDB
-            for (const dbName of Object.values(this.databases)) {
-                try {
-                    indexedDB.deleteDatabase(dbName);
-                } catch (error) {
-                    console.warn(`Failed to delete ${dbName}:`, error);
-                }
-            }
-
-            return true;
-        } catch (error) {
-            console.error('Clear all data failed:', error);
-            throw error;
-        }
-    }
-}
-
-// Create global instance
-window.storageManager = new StorageManager();
