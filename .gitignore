@@ -1,0 +1,3 @@
+# Server logs and process IDs
+server.log
+server.pid
